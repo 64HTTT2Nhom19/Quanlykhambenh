@@ -1,0 +1,8 @@
+user_id,name,email,gender,phone,password,role
+0,Admin,admin@mail.com,,19001515,111111,admin
+1,Lê Trần Hiếu,Lehieu@mail.com,Nam,372250073,123456,user
+2,Nguyễn Thị Mỹ Linh,Mylinh@mail.com,Nữ,874633278,654321,user
+3,Bùi Linh Nga,Linhnga@mail.com,Nữ,922467797,112233,user
+4,Nguyễn Minh Hiển,Minhhien@mail.com,Nam,904655173,445566,user
+5,Nguyễn Bích Ngọc,Bngoc@mail.com,Nữ,328116749,123123,user
+
