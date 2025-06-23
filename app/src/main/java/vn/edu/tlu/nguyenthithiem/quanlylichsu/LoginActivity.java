@@ -26,10 +26,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        // Reset để nạp lại dữ liệu nếu bạn mới tăng DB_VERSION
-        SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
-        prefs.edit().putBoolean("isFirstRun", true).apply();
         // Khởi tạo DatabaseHelper
         databaseHelper = new DatabaseHelper(this);
         databaseHelper.importCSVIfFirstRun();

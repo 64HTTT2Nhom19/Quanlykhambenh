@@ -15,7 +15,7 @@
         android:id="@+id/clinicName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="PHÒNG KHÁM ĐA KHOA ABC"
+        android:text="PHÒNG KHÁM ĐA KHOA TÂM ĐỨC"
         android:textAlignment="center"
         android:textColor="#0B3D91"
         android:textSize="24sp"

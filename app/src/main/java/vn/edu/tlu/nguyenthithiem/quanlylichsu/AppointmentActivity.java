@@ -21,23 +21,36 @@ public class AppointmentActivity extends AppCompatActivity {
     DatabaseHelper dbHelper;
     List<Appointment> appointmentList;
     AppointmentAdapter adapter;
+    private int userId;
+    private String userName, userRole;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment);
 
+        //Khởi tạo
         recyclerView = findViewById(R.id.recyclerAppointments);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         dbHelper = new DatabaseHelper(this);
         appointmentList = new ArrayList<>();
 
-        // Lấy thông tin từ Intent TRONG Home
+        // Lấy thông tin từ Intent
         Intent intent = getIntent();
-        int userId = intent.getIntExtra("user_id", -1);
-        String userRole = intent.getStringExtra("user_role");
-        String userName = intent.getStringExtra("user_name");
+        userId = intent.getIntExtra("user_id", -1);
+        userRole = intent.getStringExtra("user_role");
+        userName = intent.getStringExtra("user_name");
+        //Tải dữ liệu ban đầu
+        loadAppointments();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadAppointments(); // Tải lại khi quay lại màn hình
+    }
+    private void loadAppointments(){
+        appointmentList.clear();
 
         //Phân quyền truy vấn dữ liệu
         Cursor cursor;
@@ -50,6 +63,7 @@ public class AppointmentActivity extends AppCompatActivity {
         //Đọc dữ liệu từ cursor
         if (cursor != null && cursor.moveToFirst()) {
             do {
+                @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("appointment_id"));
                 @SuppressLint("Range") String uName = cursor.getString(cursor.getColumnIndex("user_name"));
                 @SuppressLint("Range") String deptName = cursor.getString(cursor.getColumnIndex("department_name"));
                 @SuppressLint("Range") String docName = cursor.getString(cursor.getColumnIndex("doctor_name"));
@@ -57,12 +71,12 @@ public class AppointmentActivity extends AppCompatActivity {
                 @SuppressLint("Range") String time = cursor.getString(cursor.getColumnIndex("appointment_time"));
                 @SuppressLint("Range") String status = cursor.getString(cursor.getColumnIndex("status"));
 
-                appointmentList.add(new Appointment(uName, deptName, docName, clinicName, time, status));
+                appointmentList.add(new Appointment(id, uName, deptName, docName, clinicName, time, status));
             } while (cursor.moveToNext());
             cursor.close();
         }
 
-        adapter = new AppointmentAdapter(this, appointmentList, userRole);
+        adapter = new AppointmentAdapter(this, appointmentList,dbHelper, userRole);
         recyclerView.setAdapter(adapter);
 
         // Gọi hàm điều hướng

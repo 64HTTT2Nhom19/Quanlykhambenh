@@ -210,7 +210,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getAppointmentsByUserId(int userId) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT a.appointment_time, a.status, " +
+        String query = "SELECT a.appointment_id AS appointment_id, a.appointment_time, a.status, " +
                 "u.name AS user_name, d.name AS doctor_name, c.name AS clinic_name, dept.name AS department_name " +
                 "FROM appointments a " +
                 "JOIN users u ON a.user_id = u.user_id " +
@@ -224,7 +224,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getAllAppointmentsWithDetails() {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT a.appointment_time, a.status, " +
+        String query = "SELECT a.appointment_id AS appointment_id, a.appointment_time, a.status, " +
                 "u.name AS user_name, d.name AS doctor_name, c.name AS clinic_name, dept.name AS department_name " +
                 "FROM appointments a " +
                 "JOIN users u ON a.user_id = u.user_id " +
@@ -239,7 +239,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("status", newStatus);
-        db.update("appointments", values, "appointment_id = ?", new String[]{String.valueOf(appointmentId)});
+        int rowAffected = db.update("appointments", values, "appointment_id = ?", new String[]{String.valueOf(appointmentId)});
         db.close();
     }
 
