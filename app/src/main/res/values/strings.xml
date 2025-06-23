@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Quan Ly Lich Su</string>
+    <string-array name="status_array">
+        <item>booked</item>
+        <item>finished</item>
+        <item>cancel</item>
+    </string-array>
+
 </resources>

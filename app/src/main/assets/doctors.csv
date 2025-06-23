@@ -1,21 +1,31 @@
-doctor_id,name,specialty,dept_id,bio,photo_url
-1,ThS. Nguyễn Văn An,Bác sĩ Nội tổng quát,1,Bác sĩ chuyên khoa nội với hơn 10 năm kinh nghiệm,doctor1.png
-2,BSCKII. Trần Thị Bình,Ngoại tổng quát,2,Phẫu thuật viên tay nghề cao,doctor2.png
-3,TS. Lê Văn Cường,Nhi khoa,3,Bác sĩ điều trị trẻ em, thân thiện,doctor3.png
-4,ThS. Phạm Thị Dung,Sản phụ khoa,4,Bác sĩ sản phụ khoa, theo dõi thai kỳ và sinh,doctor4.png
-5,BS. Ngô Văn Huy,Hồi sức cấp cứu,5,Bác sĩ chuyên cấp cứu và hồi sức tích cực,doctor5.png
-6,BS. Hoàng Thị Lan,Khám tổng quát,6,Bác sĩ khám bệnh đầu vào,doctor6.png
-7,BSCKI. Võ Minh Tuấn,Tai mũi họng,7,Chuyên điều trị viêm xoang, viêm tai,doctor7.png
-8,ThS. Lý Thị Thảo,Răng Hàm Mặt,8,Chăm sóc răng miệng tổng quát,doctor8.png
-9,BS. Đoàn Văn Khải,Mắt,9,Điều trị tật khúc xạ, cườm nước,doctor9.png
-10,ThS. Trịnh Ngọc Mai,Da liễu,10,Bác sĩ điều trị mụn, nám, sẹo,doctor10.png
-11,Lương y Đặng Văn Minh,Y học cổ truyền,11,Châm cứu, bấm huyệt trị liệu,doctor11.png
-12,TS. Phan Thị Huệ,Ung bướu,12,Điều trị ung thư, hóa trị,doctor12.png
-13,PGS.TS. Lương Văn Khoa,Tim mạch,13,Điện tim, siêu âm tim, bệnh mạch vành,doctor13.png
-14,ThS. Đỗ Thị Tuyết,Nội tiết,14,Điều trị tiểu đường, tuyến giáp,doctor14.png
-15,BSCKII. Trịnh Hồng Sơn,Thần kinh,15,Chẩn đoán và điều trị đau đầu, động kinh,doctor15.png
-16,BSCKI. Lê Ngọc Huyền,Tiêu hóa,16,Nội soi tiêu hóa, viêm loét dạ dày,doctor16.png
-17,BS. Nguyễn Hữu Toàn,Chẩn đoán hình ảnh,17,Đọc phim X-quang, CT, MRI,doctor17.png
-18,CN. Đinh Thị Hòa,Xét nghiệm,18,Phân tích kết quả sinh hóa, vi sinh,doctor18.png
-19,ThS. Vũ Văn Hưng,Vật lý trị liệu,19,Vật lý trị liệu sau chấn thương,doctor19.png
-20,CN. Phạm Thị Mai,Dinh dưỡng,20,Tư vấn chế độ ăn bệnh lý,doctor20.png
+doctor_id,name,dept_id,bio,photo_url
+1,BSCKI. Nguyễn Quốc Sơn,6,"Chuyên gia trong lĩnh vực răng hàm mặt, với nhiều năm kinh nghiệm.",doctor1.jpg
+2,BS. Võ Hữu Quân,10,"Chuyên gia trong lĩnh vực tiêu hóa, với nhiều năm kinh nghiệm.",doctor2.jpg
+3,BS. Nguyễn Thị Thảo,9,"Chuyên gia trong lĩnh vực thần kinh, với nhiều năm kinh nghiệm.",doctor3.jpg
+4,ThS. Hoàng Thùy Long,13,"Chuyên gia trong lĩnh vực dinh dưỡng, với nhiều năm kinh nghiệm.",doctor4.jpg
+5,BSCKII. Phạm Hữu Hà,5,"Chuyên gia trong lĩnh vực tai mũi họng, với nhiều năm kinh nghiệm.",doctor5.jpg
+6,BSCKI. Đỗ Hữu Khánh,1,"Chuyên gia trong lĩnh vực nội tổng quát, với nhiều năm kinh nghiệm.",doctor6.jpg
+7,BSCKII. Võ Thùy Thảo,3,"Chuyên gia trong lĩnh vực nhi, với nhiều năm kinh nghiệm.",doctor7.jpg
+8,BSCKII. Nguyễn Minh Nam,11,"Chuyên gia trong lĩnh vực chẩn đoán hình ảnh, với nhiều năm kinh nghiệm.",doctor8.jpg
+9,BS. Hồ Duy An,11,"Chuyên gia trong lĩnh vực chẩn đoán hình ảnh, với nhiều năm kinh nghiệm.",doctor9.jpg
+10,BSCKI. Nguyễn Thùy Khánh,12,"Chuyên gia trong lĩnh vực vật lý trị liệu - phục hồi chức năng, với nhiều năm kinh nghiệm.",doctor10.jpg
+11,BS. Võ Minh Nam,8,"Chuyên gia trong lĩnh vực nội tiết, với nhiều năm kinh nghiệm.",doctor11.jpg
+12,ThS. Lê Thị Hà,12,"Chuyên gia trong lĩnh vực vật lý trị liệu - phục hồi chức năng, với nhiều năm kinh nghiệm.",doctor12.jpg
+13,BSCKII. Nguyễn Thị Quân,7,"Chuyên gia trong lĩnh vực tim mạch, với nhiều năm kinh nghiệm.",doctor13.jpg
+14,BSCKI. Đỗ Thị Hạnh,2,"Chuyên gia trong lĩnh vực ngoại tổng quát, với nhiều năm kinh nghiệm.",doctor14.jpg
+15,BSCKII. Hồ Anh Hạnh,6,"Chuyên gia trong lĩnh vực răng hàm mặt, với nhiều năm kinh nghiệm.",doctor15.jpg
+16,ThS. Đỗ Thị Mai,7,"Chuyên gia trong lĩnh vực tim mạch, với nhiều năm kinh nghiệm.",doctor16.jpg
+17,BS. Bùi Thị Uyên,5,"Chuyên gia trong lĩnh vực tai mũi họng, với nhiều năm kinh nghiệm.",doctor17.jpg
+18,BSCKII. Lê Minh Mai,4,"Chuyên gia trong lĩnh vực sản phụ khoa, với nhiều năm kinh nghiệm.",doctor18.jpg
+19,ThS. Đặng Văn Hà,3,"Chuyên gia trong lĩnh vực nhi, với nhiều năm kinh nghiệm.",doctor19.jpg
+20,ThS. Đỗ Hữu Phong,7,"Chuyên gia trong lĩnh vực tim mạch, với nhiều năm kinh nghiệm.",doctor20.jpg
+21,BSCKII. Võ Minh Mai,7,"Chuyên gia trong lĩnh vực tim mạch, với nhiều năm kinh nghiệm.",doctor21.jpg
+22,TS. Trần Hữu Phong,1,"Chuyên gia trong lĩnh vực nội tổng quát, với nhiều năm kinh nghiệm.",doctor22.jpg
+23,BSCKI. Nguyễn Minh Phong,13,"Chuyên gia trong lĩnh vực dinh dưỡng, với nhiều năm kinh nghiệm.",doctor23.jpg
+24,BSCKI. Hoàng Quốc Dung,3,"Chuyên gia trong lĩnh vực nhi, với nhiều năm kinh nghiệm.",doctor24.jpg
+25,BSCKI. Phạm Văn Hạnh,11,"Chuyên gia trong lĩnh vực chẩn đoán hình ảnh, với nhiều năm kinh nghiệm.",doctor25.jpg
+26,ThS. Phạm Văn Hạnh,4,"Chuyên gia trong lĩnh vực sản phụ khoa, với nhiều năm kinh nghiệm.",doctor26.jpg
+27,TS. Đặng Ngọc Uyên,9,"Chuyên gia trong lĩnh vực thần kinh, với nhiều năm kinh nghiệm.",doctor27.jpg
+28,BS. Nguyễn Anh Giang,2,"Chuyên gia trong lĩnh vực ngoại tổng quát, với nhiều năm kinh nghiệm.",doctor28.jpg
+29,BSCKII. Lê Duy Hà,13,"Chuyên gia trong lĩnh vực dinh dưỡng, với nhiều năm kinh nghiệm.",doctor29.jpg
+30,BSCKI. Trần Thùy Phong,6,"Chuyên gia trong lĩnh vực răng hàm mặt, với nhiều năm kinh nghiệm.",doctor30.jpg

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_navigation_bar"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:orientation="horizontal"
+    android:background="@android:color/white"
+    android:weightSum="5"
+    android:paddingHorizontal="4dp"
+    android:elevation="8dp"
+    android:gravity="center_vertical">
+
+    <!-- Hỏi đáp 24/7 -->
+    <LinearLayout
+        android:id="@+id/btn_hoi_dap"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_chat"
+            app:tint="@android:color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hỏi đáp"
+            android:textSize="11sp"
+            android:textColor="@android:color/black"/>
+    </LinearLayout>
+
+    <!-- Lịch hẹn -->
+    <LinearLayout
+        android:id="@+id/btn_lich_hen"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_calender"
+            app:tint="@android:color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lịch hẹn"
+            android:textSize="11sp"
+            android:textColor="@android:color/black"/>
+    </LinearLayout>
+
+    <!-- Trang chủ -->
+    <LinearLayout
+        android:id="@+id/btn_trang_chu"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_home_filled"
+            app:tint="#3F51B5"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trang chủ"
+            android:textSize="11sp"
+            android:textColor="#3F51B5"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- Thông báo -->
+    <LinearLayout
+        android:id="@+id/btn_thong_bao"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_notification"
+            app:tint="@android:color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thông báo"
+            android:textSize="11sp"
+            android:textColor="@android:color/black"/>
+    </LinearLayout>
+
+    <!-- Tài khoản -->
+    <LinearLayout
+        android:id="@+id/btn_tai_khoan"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_account"
+            app:tint="@android:color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tài khoản"
+            android:textSize="11sp"
+            android:textColor="@android:color/black"/>
+    </LinearLayout>
+</LinearLayout>
