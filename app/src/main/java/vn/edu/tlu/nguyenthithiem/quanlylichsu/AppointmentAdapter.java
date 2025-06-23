@@ -22,10 +22,12 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     private Context context;
     private List<Appointment> appointmentList;
     private DatabaseHelper dbHelper;
-    public AppointmentAdapter(Context context, List<Appointment> appointmentList) {
+    private String userRole;
+    public AppointmentAdapter(Context context, List<Appointment> appointmentList, String userRole) {
         this.context = context;
         this.appointmentList = appointmentList;
         this.dbHelper = new DatabaseHelper(context);
+        this.userRole = this.userRole;
     }
 
 
@@ -45,27 +47,68 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         holder.tvDoctorName.setText("Bác sĩ: " + appt.getDoctorName());
         holder.tvClinicName.setText("Cơ sở: " + appt.getClinicName());
         holder.tvTime.setText("Thời gian: " + appt.getAppointmentTime());
-        holder.tvStatus.setText("Trạng thái: " + appt.getStatus());
+        holder.tvStatus.setText("Trạng thái: " + getVietnameseStatus(appt.getStatus()));
 
-        holder.btnEditStatus.setOnClickListener(v -> {
-            String[] statuses = {"confirmed", "pending", "canceled"};
-            Appointment appointment = appointmentList.get(holder.getAdapterPosition());
-            int currentIndex = Arrays.asList(statuses).indexOf(appointment.getStatus());
-
+        // Phân quyền hủy lịch
+        if (!"admin".equalsIgnoreCase(userRole) && "pending".equalsIgnoreCase(appt.getStatus())) {
+            holder.btnCancelAppointment.setVisibility(View.VISIBLE);
+        } else {
+            holder.btnCancelAppointment.setVisibility(View.GONE);}
+        // Xử lý hủy
+        holder.btnCancelAppointment.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Chọn trạng thái mới");
-            builder.setSingleChoiceItems(statuses, currentIndex, (dialog, which) -> {
-                String newStatus = statuses[which];
-                if (!newStatus.equals(appointment.getStatus())) {
-                    appointment.setStatus(newStatus);
-                    dbHelper.updateAppointmentStatus(appointment.getId(), newStatus);
-                    notifyItemChanged(holder.getAdapterPosition());
-                }
-                dialog.dismiss();
+            builder.setTitle("Xác nhận hủy lịch");
+            builder.setMessage("Bạn có chắc muốn hủy lịch hẹn này?");
+            builder.setPositiveButton("Hủy lịch", (dialog, which) -> {
+                appt.setStatus("canceled");
+                dbHelper.updateAppointmentStatus(appt.getId(), "canceled");
+                notifyItemChanged(holder.getAdapterPosition());
             });
-            builder.setNegativeButton("Hủy", null);
+            builder.setNegativeButton("Không", null);
             builder.show();
-        });
+            });
+
+
+        //Phân quyền sửa
+        if (!"admin".equalsIgnoreCase(userRole)) {
+            holder.btnEditStatus.setVisibility(View.GONE); // Ẩn nếu không phải admin
+        } else {
+            holder.btnEditStatus.setVisibility(View.VISIBLE);
+            holder.btnEditStatus.setOnClickListener(v -> {
+            //Tạo mảng trạng thái
+            String[] statuses = {"Đã xác nhận", "Đang chờ", "Đã hủy"};
+            String[] statusValues = {"confirmed", "pending", "canceled"};
+            //Lấy lịch hẹn hiện tại
+                Appointment appointment = appointmentList.get(holder.getAdapterPosition());
+                //Tìm chỉ số trạng thái hiện tại
+                int currentIndex = Arrays.asList(statuses).indexOf(appointment.getStatus());
+                //Tạo hộp thoại
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Chọn trạng thái mới");
+                builder.setSingleChoiceItems(statuses, currentIndex, (dialog, which) -> {
+                    String newStatus = statusValues[which];
+                    // Cập nhật nếu trạng thái mới khác trạng thái hiện tại
+                    if (!newStatus.equals(appointment.getStatus())) {
+                        appointment.setStatus(newStatus);
+                        dbHelper.updateAppointmentStatus(appointment.getId(), newStatus);
+                        notifyItemChanged(holder.getAdapterPosition());
+                    }
+                    dialog.dismiss();
+                });
+                builder.setNegativeButton("Hủy", null);
+                builder.show();
+            });
+    }
+    }
+
+    //hamf chuyển đổi tiếng việt
+    private String getVietnameseStatus(String status) {
+        switch (status) {
+            case "confirmed": return "Đã xác nhận";
+            case "pending": return "Đang chờ";
+            case "canceled": return "Đã hủy";
+            default: return status;
+        }
     }
 
 
@@ -76,7 +119,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
     public static class AppointmentViewHolder extends RecyclerView.ViewHolder {
         TextView tvUserName, tvDepartmentName, tvDoctorName, tvClinicName, tvTime, tvStatus;
-        Button btnEditStatus;
+        Button btnEditStatus, btnCancelAppointment;
         public AppointmentViewHolder(@NonNull View itemView) {
             super(itemView);
             tvUserName = itemView.findViewById(R.id.tvUserName);
@@ -86,8 +129,10 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             tvTime = itemView.findViewById(R.id.tvTime);
             tvStatus = itemView.findViewById(R.id.tvStatus);
             btnEditStatus = itemView.findViewById(R.id.btnEditStatus);
+            btnCancelAppointment = itemView.findViewById(R.id.btnCancelAppointment);
 
         }
+
     }
 }
 

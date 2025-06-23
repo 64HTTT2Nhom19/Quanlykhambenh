@@ -78,5 +78,7 @@ public class AccountActivity extends AppCompatActivity {
                     .setNegativeButton("Hủy", null)
                     .show();
         });
+        // Gọi hàm điều hướng
+        NavigationUtil.setupBottomNavigation(this);
     }
 }

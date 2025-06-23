@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
+        android:text="Đăng kí tài khoản"
         android:textSize="32sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
@@ -24,8 +24,8 @@
         android:id="@+id/editTextFullName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter your full name"
-        android:inputType="textPersonName"
+        android:hint="Họ và tên"
+        android:inputType="textCapSentences|textMultiLine"
         android:padding="12dp"
         android:background="@drawable/rounded_edittext"
         android:layout_marginBottom="20dp"/>
@@ -34,7 +34,7 @@
         android:id="@+id/editTextEmailRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter your Email"
+        android:hint="Email"
         android:inputType="textEmailAddress"
         android:padding="12dp"
         android:background="@drawable/rounded_edittext"
@@ -44,7 +44,7 @@
         android:id="@+id/editTextPasswordRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Password"
+        android:hint="Nhập mật khẩu"
         android:inputType="textPassword"
         android:padding="12dp"
         android:background="@drawable/rounded_edittext"
@@ -54,7 +54,7 @@
         android:id="@+id/editTextConfirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Confirm password"
+        android:hint="Nhập lại mật khẩu"
         android:inputType="textPassword"
         android:padding="12dp"
         android:background="@drawable/rounded_edittext"
@@ -64,7 +64,7 @@
         android:id="@+id/buttonRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="Đăng kí"
         android:background="@drawable/rounded_button"
         android:textColor="@android:color/white"
         android:textSize="18sp"
@@ -80,14 +80,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Already have an account ? "
+            android:text="Bạn đã có tài khoản?"
             android:textColor="@android:color/black"/>
 
         <TextView
             android:id="@+id/textViewSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign In"
+            android:text="Đăng nhập"
             android:textColor="#3F51B5"
             android:textStyle="bold"/>
     </LinearLayout>

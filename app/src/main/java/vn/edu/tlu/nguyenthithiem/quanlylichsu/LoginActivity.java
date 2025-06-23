@@ -1,6 +1,7 @@
 package vn.edu.tlu.nguyenthithiem.quanlylichsu;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +26,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        // Reset để nạp lại dữ liệu nếu bạn mới tăng DB_VERSION
+        SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        prefs.edit().putBoolean("isFirstRun", true).apply();
         // Khởi tạo DatabaseHelper
+        databaseHelper = new DatabaseHelper(this);
+        databaseHelper.importCSVIfFirstRun();
+
         databaseHelper = new DatabaseHelper(this);
         databaseHelper.importCSVIfFirstRun();
 
@@ -51,6 +59,15 @@ public class LoginActivity extends AppCompatActivity {
                     User user = databaseHelper.checkUser(email, password);
                     if (user != null) {
                         Toast.makeText(LoginActivity.this, "Đăng nhập thành công! Vai trò: " + user.getRole(), Toast.LENGTH_SHORT).show();
+
+                        //Lưu user_id vào SharedPreferences
+                        SharedPreferences prefs = getSharedPreferences("user_session", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putInt("user_id", user.getUserId());
+                        editor.putString("user_name", user.getName());
+                        editor.putString("user_role", user.getRole());
+                        editor.apply();
+
                         // Chuyển sang HomeActivity
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         intent.putExtra("user_id", user.getUserId());
@@ -65,6 +82,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+
 
         // Xử lý sự kiện click cho TextView "Sign Up"
         textViewSignUp.setOnClickListener(new View.OnClickListener() {

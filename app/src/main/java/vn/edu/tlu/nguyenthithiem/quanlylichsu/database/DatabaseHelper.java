@@ -12,13 +12,19 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
-import vn.edu.tlu.nguyenthithiem.quanlylichsu.models.Appointment;
+import vn.edu.tlu.nguyenthithiem.quanlylichsu.models.Clinic;
+import vn.edu.tlu.nguyenthithiem.quanlylichsu.models.Doctor;
 import vn.edu.tlu.nguyenthithiem.quanlylichsu.models.User;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "clinic_system.db";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 3;
     private final Context context;
 
     public DatabaseHelper(Context context) {
@@ -48,7 +54,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE appointments (" +
                 "appointment_id INTEGER PRIMARY KEY, " +
                 "user_id INTEGER, doctor_id INTEGER, clinic_id INTEGER, " +
-                "created_at TEXT, appointment_time TEXT, status TEXT, " +
+                "created_at TEXT, appointment_time TEXT," +
+                "status TEXT NOT NULL DEFAULT 'Chờ xác nhận' CHECK(status IN ('Chờ xác nhận', 'Đã xác nhận', 'Đã hủy'))," +
                 "FOREIGN KEY(user_id) REFERENCES users(user_id), " +
                 "FOREIGN KEY(doctor_id) REFERENCES doctors(doctor_id), " +
                 "FOREIGN KEY(clinic_id) REFERENCES clinics(clinic_id))");
@@ -235,6 +242,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.update("appointments", values, "appointment_id = ?", new String[]{String.valueOf(appointmentId)});
         db.close();
     }
+
     //Lấy thông tin người dùng để hiển thị trong tài khoản
     public User getUserById(int userId) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -255,6 +263,79 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return user;
     }
+
+    //Lấy thông tin bác sĩ
+    public List<Doctor> getAllDoctors() {
+        List<Doctor> doctors = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT doctor_id, name, dept_id, bio, photo_url FROM doctors", null);
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow("doctor_id"));
+                String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                int deptId = cursor.getInt(cursor.getColumnIndexOrThrow("dept_id"));
+                String bio = cursor.getString(cursor.getColumnIndexOrThrow("bio"));
+                String photoUrl = cursor.getString(cursor.getColumnIndexOrThrow("photo_url"));
+
+                Doctor doctor = new Doctor(id, name, deptId, bio, photoUrl);
+                doctors.add(doctor);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return doctors;
+    }
+
+    //Lấy danh sách cơ sở
+    public List<Clinic> getAllClinics() {
+        List<Clinic> list = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT clinic_id, name FROM clinics", null);
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                list.add(new Clinic(id, name));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return list;
+    }
+
+    //Kiểm tra lịch trống
+    public boolean isDoctorAvailable(int doctorId, int clinicId, String appointmentTime) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM appointments " +
+                        "WHERE doctor_id = ? AND clinic_id = ? AND appointment_time = ?",
+                new String[]{String.valueOf(doctorId), String.valueOf(clinicId), appointmentTime}
+        );
+
+        boolean available = !cursor.moveToFirst(); // true nếu KHÔNG có lịch trùng
+        cursor.close();
+        return available;
+    }
+
+
+    // Lưu thông tin đặt lịch mới vào bảng appointment
+    public boolean insertAppointment(int userId, int doctorId, int clinicId, String appointmentTime) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        //Định dạng thời gian
+        String createdAt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+
+        values.put("user_id", userId);
+        values.put("doctor_id", doctorId);
+        values.put("clinic_id", clinicId);
+        values.put("created_at", createdAt); //Định dạng yyyy-MM-dd HH:mm
+        values.put("appointment_time", appointmentTime);
+        values.put("status", "Chờ xác nhận");
+        long result = db.insert("appointments", null, values);
+        return result != -1;
+    }
+
+
 
 
 

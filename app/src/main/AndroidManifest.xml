@@ -24,6 +24,7 @@
         <activity android:name=".HomeActivity" />
         <activity android:name=".AppointmentActivity" />
         <activity android:name=".AccountActivity"/>
+        <activity android:name=".BookingActivity"/>
     </application>
 
 </manifest>

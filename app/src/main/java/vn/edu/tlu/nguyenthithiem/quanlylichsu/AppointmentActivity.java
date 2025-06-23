@@ -62,7 +62,10 @@ public class AppointmentActivity extends AppCompatActivity {
             cursor.close();
         }
 
-        adapter = new AppointmentAdapter(this, appointmentList);
+        adapter = new AppointmentAdapter(this, appointmentList, userRole);
         recyclerView.setAdapter(adapter);
+
+        // Gọi hàm điều hướng
+        NavigationUtil.setupBottomNavigation(this);
     }
 }
